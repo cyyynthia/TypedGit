@@ -31,7 +31,7 @@ func main() {
 	router.GET("/gitlab/:owner/:repo/:branch/*file", serve(gitlabPattern))
 	router.GET("/github/:owner/:repo/:branch/*file", serve(githubPattern))
 	router.GET("/", func(ctx *fasthttp.RequestCtx) {
-		ctx.SendFile("docs.html")
+		ctx.SendFile("generator.html")
 	})
 
 	handler := router.Handler
