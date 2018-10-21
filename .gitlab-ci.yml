@@ -18,7 +18,8 @@ deploy:
   - ssh -o StrictHostKeyChecking=no gitlabci@$SSH_IP 'killall -s SIGINT TypedGit || true'
   - ssh -o StrictHostKeyChecking=no gitlabci@$SSH_IP 'screen -S TypedGit -X quit || true'
   # Push to server
-  - scp -o StrictHostKeyChecking=no ./TypedGit gitlabci@$SSH_IP:/home/gitlabci/typedgit/TypedGit
+  - scp -o StrictHostKeyChecking=no ./typedgit gitlabci@$SSH_IP:/home/gitlabci/typedgit/TypedGit
+  - scp -o StrictHostKeyChecking=no ./docs.html gitlabci@$SSH_IP:/home/gitlabci/typedgit/docs.html
   # Start the bot
   - ssh -o StrictHostKeyChecking=no gitlabci@$SSH_IP 'screen -dmS TypedGit sh'
   - ssh -o StrictHostKeyChecking=no gitlabci@$SSH_IP 'screen -S TypedGit -X stuff "cd /home/gitlabci/typedgit\n"'
