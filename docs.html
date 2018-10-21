@@ -1,9 +1,85 @@
 <!DOCTYPE html>
 <head>
-    <title>docs</title>
+    <title>TypedGit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Meta -->
+    <meta content="TypedGit" property="og:title"/>
+    <meta content="A small go server made to serve GitHub and GitLab files with correct Content-Type" property="og:description"/>
+    <meta content="A small go server made to serve GitHub and GitLab files with correct Content-Type" property="description"/>
+
+    <!-- CSS -->
+    <link href="https://modesta.alexflipnote.xyz/css/modesta.min.css" type="text/css" rel="stylesheet">
+    <style>
+        #modesta-credit {
+            color: #f49898;
+            text-decoration: none;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            padding: 10px 15px;
+        }
+
+        .typedgit-container {
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-container {
+            background-color: #242424;
+            padding: 25px 35px;
+        }
+
+        .results {
+            margin-top: 10px;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<p>soon(tm)</p>
+<div class="typedgit-container">
+    <h1>TypedGit</h1>
+    <div class="form-container box-shadow">
+        <label for="f-host">Host</label>
+        <select name="host" id="f-host" class="full-width">
+            <option selected>GitHub</option>
+            <option>GitLab</option>
+        </select>
+        <div class="row">
+            <div class="one-half column">
+                <label for="f-owner">Owner</label>
+                <input type="text" id="f-owner" class="full-width" placeholder="Bowser65">
+            </div>
+            <div class="one-half column">
+                <label for="f-repo">Repo</label>
+                <input type="text" id="f-repo" class="full-width" placeholder="TypedGit">
+            </div>
+        </div>
+        <label for="f-file">File path</label>
+        <input type="text" id="f-file" class="full-width" placeholder="/path/to/the/file">
+        <div class="results">
+            https://<span style="color: #f49898">typedgit.bowser65.tk</span>/<span class="sun-flower-text" id="host">github</span>/<span class="sun-flower-text" id="owner">&lt;owner&gt;</span>/<span class="sun-flower-text" id="repo">&lt;repo&gt;</span>/<span class="sun-flower-text" id="file">&lt;file&gt;</span>
+        </div>
+    </div>
+</div>
+<a href="https://github.com/AlexFlipnote/ModestaCSS" target="_blank" id="modesta-credit">Design by AlexFlipnote ♥</a>
+<script>
+    setInterval(() => {
+      requestAnimationFrame(() => {
+          document.querySelector('#host').innerText = document.querySelector('#f-host').value.toLowerCase()
+          document.querySelector('#owner').innerText = document.querySelector('#f-owner').value !== '' ? document.querySelector('#f-owner').value : '<owner>'
+          document.querySelector('#repo').innerText = document.querySelector('#f-repo').value !== '' ? document.querySelector('#f-repo').value : '<repo>'
+          document.querySelector('#file').innerText = document.querySelector('#f-file').value !== '' ? document.querySelector('#f-file').value : '<file>'
+      })
+    }, 100)
+</script>
 </body>
-
-
