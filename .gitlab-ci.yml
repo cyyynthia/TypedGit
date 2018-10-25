@@ -23,13 +23,13 @@ deploy:
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
   script:
+    # Kill the bot
+    - ssh gitlabci@$SSH_IP 'killall -s SIGINT TypedGit || true'
+    - ssh gitlabci@$SSH_IP 'screen -S TypedGit -X quit || true'
     # Push to server
     - scp ./typedgit gitlabci@$SSH_IP:/home/gitlabci/typedgit/TypedGit
     - scp ./generator.html gitlabci@$SSH_IP:/home/gitlabci/typedgit/generator.html
     - scp ./style.css gitlabci@$SSH_IP:/home/gitlabci/typedgit/style.css
-    # Kill the bot
-    - ssh gitlabci@$SSH_IP 'killall -s SIGINT TypedGit || true'
-    - ssh gitlabci@$SSH_IP 'screen -S TypedGit -X quit || true'
     # Start the bot
     - ssh gitlabci@$SSH_IP 'screen -dmS TypedGit sh'
     - ssh gitlabci@$SSH_IP 'screen -S TypedGit -X stuff "cd /home/gitlabci/typedgit\n"'
