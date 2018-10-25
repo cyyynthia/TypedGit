@@ -1,26 +1,36 @@
 image: golang:latest
 
-before_script:
-# Load private key
-- which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
-- eval $(ssh-agent -s)
-- ssh-add <(echo "$SSH_PRIVATE_KEY")
-- mkdir -p ~/.ssh
+stages:
+  - build
+  - deploy
+
+compile:
+  stage: build
+  script:
+    - go build
+  artifacts:
+    paths:
+      - typedgit
 
 deploy:
   stage: deploy
   only:
-  - master
+    - master
+  before_script:
+    - which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
   script:
-  # Build project
-  - go build
-  # Kill the bot
-  - ssh -o StrictHostKeyChecking=no gitlabci@$SSH_IP 'killall -s SIGINT TypedGit || true'
-  - ssh -o StrictHostKeyChecking=no gitlabci@$SSH_IP 'screen -S TypedGit -X quit || true'
-  # Push to server
-  - scp -o StrictHostKeyChecking=no ./typedgit gitlabci@$SSH_IP:/home/gitlabci/typedgit/TypedGit
-  - scp -o StrictHostKeyChecking=no ./generator.html gitlabci@$SSH_IP:/home/gitlabci/typedgit/generator.html
-  # Start the bot
-  - ssh -o StrictHostKeyChecking=no gitlabci@$SSH_IP 'screen -dmS TypedGit sh'
-  - ssh -o StrictHostKeyChecking=no gitlabci@$SSH_IP 'screen -S TypedGit -X stuff "cd /home/gitlabci/typedgit\n"'
-  - ssh -o StrictHostKeyChecking=no gitlabci@$SSH_IP 'screen -S TypedGit -X stuff "./TypedGit\n"'
+    # Push to server
+    - scp ./typedgit gitlabci@$SSH_IP:/home/gitlabci/typedgit/TypedGit
+    - scp ./generator.html gitlabci@$SSH_IP:/home/gitlabci/typedgit/generator.html
+    - scp ./style.css gitlabci@$SSH_IP:/home/gitlabci/typedgit/style.css
+    # Kill the bot
+    - ssh gitlabci@$SSH_IP 'killall -s SIGINT TypedGit || true'
+    - ssh gitlabci@$SSH_IP 'screen -S TypedGit -X quit || true'
+    # Start the bot
+    - ssh gitlabci@$SSH_IP 'screen -dmS TypedGit sh'
+    - ssh gitlabci@$SSH_IP 'screen -S TypedGit -X stuff "cd /home/gitlabci/typedgit\n"'
+    - ssh gitlabci@$SSH_IP 'screen -S TypedGit -X stuff "./TypedGit --compress\n"'
