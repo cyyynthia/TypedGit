@@ -13,40 +13,7 @@
 
     <!-- CSS -->
     <link href="https://modesta.alexflipnote.xyz/css/modesta.min.css" type="text/css" rel="stylesheet">
-    <style>
-        #modesta-credit {
-            color: #f49898;
-            text-decoration: none;
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            padding: 10px 15px;
-        }
-
-        .typedgit-container {
-            width: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translateX(-50%) translateY(-50%);
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .form-container {
-            background-color: #242424;
-            padding: 25px 35px;
-        }
-
-        .results {
-            margin-top: 10px;
-            font-size: 20px;
-            text-align: center;
-            letter-spacing: .13em;
-        }
-    </style>
+    <link href="/style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="typedgit-container">
@@ -77,37 +44,28 @@
         </div>
         <label for="f-file">File path</label>
         <input type="text" id="f-file" class="full-width" placeholder="/path/to/the/file">
-        <div class="results">
-            https://<span style="color: #f49898">typedgit.bowser65.tk</span>/<span class="sun-flower-text" id="host"></span>/<span class="sun-flower-text" id="owner"></span>/<span class="sun-flower-text" id="repo"></span>/<span class="sun-flower-text" id="branch"></span>/<span class="sun-flower-text" id="file"></span>
+        <button class="btn pink">Generate</button>
+        <span class="results"></span>
+        <hr>
+        <div class="template">
+            https://<span style="color: #f49898">typedgit.bowser65.tk</span>/<span class="sun-flower-text">&lt;host&gt;</span>/<span class="sun-flower-text">&lt;owner&gt;</span>/<span class="sun-flower-text">&lt;repo&gt;</span>/<span class="sun-flower-text">&lt;branch&gt;</span>/<span class="sun-flower-text">&lt;file&gt;</span>
         </div>
     </div>
 </div>
 <a href="https://github.com/AlexFlipnote/ModestaCSS" target="_blank" id="modesta-credit">Design by AlexFlipnote ♥</a>
 <script>
-    const fHost = document.querySelector('#f-host')
-    const fOwner = document.querySelector('#f-owner')
-    const fRepo = document.querySelector('#f-repo')
-    const fBranch = document.querySelector('#f-branch')
-    const fFile = document.querySelector('#f-file')
-    const host = document.querySelector('#host')
-    const owner = document.querySelector('#owner')
-    const repo = document.querySelector('#repo')
-    const branch = document.querySelector('#branch')
-    const file = document.querySelector('#file')
-    setInterval(() => {
-        requestAnimationFrame(() => {
-            const vHost = fHost.value.toLowerCase()
-            const vOwner = fOwner.value !== '' ? fOwner.value : '<owner>'
-            const vRepo = fRepo.value !== '' ? fRepo.value : '<repo>'
-            const vBranch = fBranch.value !== '' ? fBranch.value : '<branch>'
-            const vFile = fFile.value !== '' ? fFile.value : '<file>'
-
-            if (host.innerText !== vHost) host.innerText = vHost
-            if (owner.innerText !== vOwner) owner.innerText = vOwner
-            if (repo.innerText !== vRepo) repo.innerText = vRepo
-            if (branch.innerText !== vBranch) branch.innerText = vBranch
-            if (file.innerText !== vFile) file.innerText = vFile
-        })
-    }, 100)
+    document.querySelector('.pink').addEventListener('click', function () {
+        const fHost = document.querySelector('#f-host')
+        const fOwner = document.querySelector('#f-owner')
+        const fRepo = document.querySelector('#f-repo')
+        const fBranch = document.querySelector('#f-branch')
+        const fFile = document.querySelector('#f-file')
+        const vHost = fHost.value.toLowerCase()
+        const vOwner = fOwner.value !== '' ? fOwner.value : '<owner>'
+        const vRepo = fRepo.value !== '' ? fRepo.value : '<repo>'
+        const vBranch = fBranch.value !== '' ? fBranch.value : '<branch>'
+        const vFile = fFile.value !== '' ? fFile.value : '<file>'
+        document.querySelector('.results').innerText = `https://typedgit.bowser65.tk/github/${vHost}/${vOwner}/${vRepo}/${vBranch}/${vFile}`
+    })
 </script>
 </body>

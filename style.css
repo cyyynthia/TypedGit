@@ -1,0 +1,47 @@
+#modesta-credit {
+    color: #f49898;
+    text-decoration: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 10px 15px;
+}
+
+.typedgit-container {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+h1 {
+    text-align: center;
+}
+
+.form-container {
+    background-color: #242424;
+    padding: 25px 35px;
+}
+
+.template {
+    margin-top: 10px;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: .13em;
+}
+
+.results {
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.pink {
+    box-shadow: none;
+    background-color: #f49898;
+    filter: drop-shadow(5px 5px 0 rgba(244, 152, 152, 0.6));
+}
+
+.pink:hover {
+    filter: drop-shadow(5px 5px 0 rgba(244, 152, 152, 0.6)) brightness(50%);
+}

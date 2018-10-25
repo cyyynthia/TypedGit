@@ -8,6 +8,7 @@ import (
 	"gopkg.in/h2non/filetype.v1"
 	"gopkg.in/h2non/filetype.v1/types"
 	"log"
+	"net/url"
 	"strings"
 	"time"
 )
@@ -30,8 +31,12 @@ func main() {
 	router := fasthttprouter.New()
 	router.GET("/gitlab/:owner/:repo/:branch/*file", serve(gitlabPattern))
 	router.GET("/github/:owner/:repo/:branch/*file", serve(githubPattern))
+	// Files
 	router.GET("/", func(ctx *fasthttp.RequestCtx) {
 		ctx.SendFile("generator.html")
+	})
+	router.GET("/style.css", func(ctx *fasthttp.RequestCtx) {
+		ctx.SendFile("style.css")
 	})
 
 	handler := router.Handler
@@ -47,14 +52,15 @@ func main() {
 
 func serve(basepath string) func(ctx *fasthttp.RequestCtx) {
 	return func(ctx *fasthttp.RequestCtx) {
-		status, body, err := fasthttp.GetTimeout(nil, fmt.Sprintf(basepath, ctx.UserValue("owner"), ctx.UserValue("repo"), ctx.UserValue("branch"), ctx.UserValue("file")), 5*time.Second)
+		file := fmt.Sprintf("%s", ctx.UserValue("file"))
+		status, body, err := fasthttp.GetTimeout(nil, fmt.Sprintf(basepath, ctx.UserValue("owner"), ctx.UserValue("repo"), ctx.UserValue("branch"), strings.Replace(url.PathEscape(file), "%2F", "/", -1)), 5*time.Second)
 		if status != 200 || err != nil {
 			ctx.Error("Unable to download the file", 500)
 			return
 		}
 
-		file := strings.Split(fmt.Sprintf("%s", ctx.UserValue("file")), ".")
-		mime := filetype.GetType(file[len(file)-1]).MIME.Value
+		f := strings.Split(file, ".")
+		mime := filetype.GetType(f[len(f)-1]).MIME.Value
 		if mime == "" {
 			mime = "text/plain"
 		}
