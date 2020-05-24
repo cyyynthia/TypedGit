@@ -30,6 +30,7 @@ deploy:
     - scp ./typedgit gitlabci@$SSH_IP:/home/gitlabci/typedgit/TypedGit
     - scp ./generator.html gitlabci@$SSH_IP:/home/gitlabci/typedgit/generator.html
     - scp ./style.css gitlabci@$SSH_IP:/home/gitlabci/typedgit/style.css
+    - scp ./modesta.min.css gitlabci@$SSH_IP:/home/gitlabci/typedgit/modesta.min.css
     # Start the bot
     - ssh gitlabci@$SSH_IP 'screen -dmS TypedGit sh'
     - ssh gitlabci@$SSH_IP 'screen -S TypedGit -X stuff "cd /home/gitlabci/typedgit\n"'
