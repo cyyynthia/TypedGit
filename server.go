@@ -38,6 +38,9 @@ func main() {
 	router.GET("/style.css", func(ctx *fasthttp.RequestCtx) {
 		ctx.SendFile("style.css")
 	})
+	router.GET("/modesta.min.css", func(ctx *fasthttp.RequestCtx) {
+		ctx.SendFile("modesta.min.css")
+	})
 
 	handler := router.Handler
 	if *compress {
