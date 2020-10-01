@@ -15,5 +15,5 @@ GET /github/AlexFlipnote/Discord_Theme/master/theme.css
 
 For GitLab, just replace /github by /gitlab:
 ```
-GET /gitlab/Bowser65/React-Modesta/master/demos/img/wallpaper3.jpg
+GET /gitlab/gitlab-org/gitlab/master/public/apple-touch-icon.png
 ```
