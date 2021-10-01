@@ -1,6 +1,5 @@
 # TypedGit
-This project is inspired by the original RawGit project : https://github.com/rgrove/rawgit
-
+This project is inspired by the original RawGit project : https://github.com/rgrove/rawgit <br>
 Since this service is going to shut down, I decided to write my own thing
 
 ## How it works ?
