@@ -16,56 +16,56 @@
     <link href="/style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<div class="typedgit-container">
-    <h1>TypedGit</h1>
-    <div class="form-container box-shadow">
-        <div class="row">
-            <div class="one-half column">
-                <label for="f-host">Host</label>
-                <select name="host" id="f-host" class="full-width">
-                    <option selected>GitHub</option>
-                    <option>GitLab</option>
-                </select>
+    <div class="typedgit-container">
+        <h1>TypedGit</h1>
+        <div class="form-container box-shadow">
+            <div class="row">
+                <div class="one-half column">
+                    <label for="f-host">Host</label>
+                    <select name="host" id="f-host" class="full-width">
+                        <option selected>GitHub</option>
+                        <option>GitLab</option>
+                    </select>
+                </div>
+                <div class="one-half column">
+                    <label for="f-owner">Owner</label>
+                    <input type="text" id="f-owner" class="full-width" placeholder="Bowser65">
+                </div>
             </div>
-            <div class="one-half column">
-                <label for="f-owner">Owner</label>
-                <input type="text" id="f-owner" class="full-width" placeholder="Bowser65">
+            <div class="row">
+                <div class="one-half column">
+                    <label for="f-repo">Repo</label>
+                    <input type="text" id="f-repo" class="full-width" placeholder="TypedGit">
+                </div>
+                <div class="one-half column">
+                    <label for="f-branch">Branch</label>
+                    <input type="text" id="f-branch" class="full-width" placeholder="master">
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="one-half column">
-                <label for="f-repo">Repo</label>
-                <input type="text" id="f-repo" class="full-width" placeholder="TypedGit">
+            <label for="f-file">File path</label>
+            <input type="text" id="f-file" class="full-width" placeholder="/path/to/the/file">
+            <button class="btn pink">Generate</button>
+            <span class="results"></span>
+            <hr>
+            <div class="template">
+                https://<span style="color: #f49898">typedgit.bowser65.xyz</span>/<span class="sun-flower-text">&lt;host&gt;</span>/<span class="sun-flower-text">&lt;owner&gt;</span>/<span class="sun-flower-text">&lt;repo&gt;</span>/<span class="sun-flower-text">&lt;branch&gt;</span>/<span class="sun-flower-text">&lt;file&gt;</span>
             </div>
-            <div class="one-half column">
-                <label for="f-branch">Branch</label>
-                <input type="text" id="f-branch" class="full-width" placeholder="master">
-            </div>
-        </div>
-        <label for="f-file">File path</label>
-        <input type="text" id="f-file" class="full-width" placeholder="/path/to/the/file">
-        <button class="btn pink">Generate</button>
-        <span class="results"></span>
-        <hr>
-        <div class="template">
-            https://<span style="color: #f49898">typedgit.bowser65.xyz</span>/<span class="sun-flower-text">&lt;host&gt;</span>/<span class="sun-flower-text">&lt;owner&gt;</span>/<span class="sun-flower-text">&lt;repo&gt;</span>/<span class="sun-flower-text">&lt;branch&gt;</span>/<span class="sun-flower-text">&lt;file&gt;</span>
         </div>
     </div>
-</div>
-<a href="https://github.com/AlexFlipnote/ModestaCSS" target="_blank" id="modesta-credit">Design by AlexFlipnote ♥</a>
-<script>
-    document.querySelector('.pink').addEventListener('click', function () {
-        const fHost = document.querySelector('#f-host')
-        const fOwner = document.querySelector('#f-owner')
-        const fRepo = document.querySelector('#f-repo')
-        const fBranch = document.querySelector('#f-branch')
-        const fFile = document.querySelector('#f-file')
-        const vHost = fHost.value.toLowerCase()
-        const vOwner = fOwner.value !== '' ? fOwner.value : '<owner>'
-        const vRepo = fRepo.value !== '' ? fRepo.value : '<repo>'
-        const vBranch = fBranch.value !== '' ? fBranch.value : '<branch>'
-        const vFile = fFile.value !== '' ? fFile.value : '<file>'
-        document.querySelector('.results').innerText = `https://typedgit.bowser65.xyz/${vHost}/${vOwner}/${vRepo}/${vBranch}/${vFile}`
-    })
-</script>
+    <a href="https://github.com/AlexFlipnote/ModestaCSS" target="_blank" id="modesta-credit">Design by AlexFlipnote ♥</a>
+    <script>
+        document.querySelector('.pink').addEventListener('click', function () {
+            const fHost = document.querySelector('#f-host')
+            const fOwner = document.querySelector('#f-owner')
+            const fRepo = document.querySelector('#f-repo')
+            const fBranch = document.querySelector('#f-branch')
+            const fFile = document.querySelector('#f-file')
+            const vHost = fHost.value.toLowerCase()
+            const vOwner = fOwner.value !== '' ? fOwner.value : '<owner>'
+            const vRepo = fRepo.value !== '' ? fRepo.value : '<repo>'
+            const vBranch = fBranch.value !== '' ? fBranch.value : '<branch>'
+            const vFile = fFile.value !== '' ? fFile.value : '<file>'
+            document.querySelector('.results').innerText = `https://typedgit.bowser65.xyz/${vHost}/${vOwner}/${vRepo}/${vBranch}/${vFile}`
+        })
+    </script>
 </body>
